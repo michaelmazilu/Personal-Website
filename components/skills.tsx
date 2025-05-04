@@ -1,9 +1,12 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import { Calculator, BookOpen, Atom, Code, Lightbulb, Users, Globe, PenTool, Microscope, Brain } from "lucide-react"
+import { useRef } from "react"
 
 export default function Skills() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
   const skills = [
     {
       icon: <Calculator className="h-8 w-8" />,
@@ -73,7 +76,14 @@ export default function Skills() {
   }
 
   return (
-    <section id="skills" className="py-20 md:py-32">
+    <motion.section
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      id="skills"
+      className="py-20 md:py-32"
+    >
       <div className="container px-4">
         <div className="text-center mb-16">
           <motion.div
@@ -109,6 +119,6 @@ export default function Skills() {
           ))}
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }

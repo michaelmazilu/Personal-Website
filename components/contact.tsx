@@ -1,12 +1,23 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import { MailIcon, LinkedinIcon } from "lucide-react"
 import Link from "next/link"
+import { useRef } from "react"
 
 export default function Contact() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
-    <section id="contact" className="py-20 md:py-32">
+    <motion.section
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      id="contact"
+      className="py-20 md:py-32"
+    >
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -41,6 +52,6 @@ export default function Contact() {
           </div>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }

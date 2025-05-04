@@ -1,10 +1,13 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
+import { useRef } from "react"
 
 export default function Experience() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
   const experiences = [
     {
       title: "Mechanical Engineering Intern",
@@ -42,7 +45,14 @@ export default function Experience() {
   }
 
   return (
-    <section id="experience" className="py-20 md:py-32">
+    <motion.section
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      id="experience"
+      className="py-20 md:py-32"
+    >
       <div className="container px-4">
         <div className="text-center mb-16">
           <motion.div
@@ -63,7 +73,15 @@ export default function Experience() {
           className="max-w-3xl mx-auto space-y-8"
         >
           {experiences.map((exp, index) => (
-            <motion.div key={index} variants={item} className="flex gap-4 items-start border-b border-border pb-6">
+            <motion.div
+              key={index}
+              variants={item}
+              initial="hidden"
+              whileInView="show"
+              exit={{ opacity: 0, y: 40 }}
+              viewport={{ once: true, amount: 0.3 }}
+              className="flex gap-4 items-start border-b border-border pb-6"
+            >
               <div className="flex-shrink-0 w-12 h-12 rounded bg-white flex items-center justify-center overflow-hidden border border-border">
                 <Image src={exp.image} alt={exp.company + ' logo'} width={48} height={48} className="object-contain" />
               </div>
@@ -84,12 +102,17 @@ export default function Experience() {
                 <div className="mt-2">{exp.description}</div>
                 <div className="flex flex-wrap gap-2 mt-3">
                   {exp.tags.map((tag, tagIndex) => (
-                    <span
+                    <motion.span
                       key={tagIndex}
-                      className="text-xs px-3 py-1 rounded-full bg-secondary text-secondary-foreground"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 * tagIndex, duration: 0.5, type: 'spring' }}
+                      className="relative inline-block px-4 py-1 rounded-full font-semibold text-white shadow-md overflow-hidden animated-gradient-tag"
+                      style={{ zIndex: 1 }}
                     >
-                      {tag}
-                    </span>
+                      <span className="relative z-10" style={{ mixBlendMode: 'difference' }}>{tag}</span>
+                      <span className="absolute inset-0 w-full h-full animated-gradient-bg" aria-hidden="true" />
+                    </motion.span>
                   ))}
                 </div>
               </div>
@@ -97,6 +120,6 @@ export default function Experience() {
           ))}
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }

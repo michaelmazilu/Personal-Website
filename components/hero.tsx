@@ -37,7 +37,7 @@ export default function Hero() {
             transition={{ delay: 0.2, duration: 0.8 }}
             className={`${inter.className} text-lg md:text-xl mb-4 text-white font-medium tracking-wide`}
           >
-            Software Engineer & Problem Solver
+            Builder
           </motion.p>
           
           <motion.h1
@@ -55,7 +55,7 @@ export default function Hero() {
             transition={{ delay: 0.6, duration: 0.8 }}
             className={`${inter.className} text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed`}
           >
-            Crafting elegant solutions to complex problems through innovative software and hardware projects.
+            Crafting Innovative solutions to hardware and software problems.
           </motion.p>
 
           <motion.div

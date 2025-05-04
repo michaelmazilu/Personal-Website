@@ -28,12 +28,21 @@ export default function Navbar() {
   }, [])
 
   const navLinks = [
-    { name: "Experience", href: "#experience" },
-    { name: "Projects", href: "#projects" },
-    { name: "Skills", href: "#skills" },
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
+    { name: "experience", href: "#experience" },
+    { name: "projects", href: "#projects" },
+    { name: "skills", href: "#skills" },
+    { name: "about", href: "#about" },
+    { name: "contact", href: "#contact" },
   ]
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const id = href.replace('#', '');
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <motion.header
@@ -49,9 +58,14 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <nav className={`hidden md:flex items-center space-x-8 ${majorMono.className}`}>
           {navLinks.map((link) => (
-            <Link key={link.name} href={link.href} className="text-sm font-medium hover:text-primary transition-colors">
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
+              className="text-sm font-medium hover:text-primary transition-colors cursor-pointer"
+            >
               {link.name}
-            </Link>
+            </a>
           ))}
           <ThemeToggle />
         </nav>
@@ -82,14 +96,17 @@ export default function Navbar() {
         >
           <div className="container py-4 flex flex-col space-y-4">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium py-2 hover:text-primary transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) => {
+                  handleNavClick(e, link.href);
+                  setMobileMenuOpen(false);
+                }}
+                className="text-sm font-medium py-2 hover:text-primary transition-colors cursor-pointer"
               >
                 {link.name}
-              </Link>
+              </a>
             ))}
           </div>
         </motion.div>

@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { motion } from "framer-motion"
+import { useState, useRef } from "react"
+import { motion, useInView } from "framer-motion"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ExternalLinkIcon, GithubIcon } from "lucide-react"
@@ -9,6 +9,8 @@ import Link from "next/link"
 
 export default function Projects() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   const projects = [
     {
@@ -49,7 +51,14 @@ export default function Projects() {
   }
 
   return (
-    <section id="projects" className="py-20 md:py-32 relative">
+    <motion.section
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      id="projects"
+      className="py-20 md:py-32 relative"
+    >
       <div className="container px-4">
         <div className="text-center mb-16">
           <motion.div
@@ -78,6 +87,10 @@ export default function Projects() {
             <motion.div
               key={index}
               variants={item}
+              initial="hidden"
+              whileInView="show"
+              exit={{ opacity: 0, y: 40 }}
+              viewport={{ once: true, amount: 0.3 }}
               className="group relative rounded-2xl overflow-hidden border border-border bg-card/50 backdrop-blur-sm hover:border-white/50 transition-all duration-300 hover:shadow-lg hover:shadow-white/10"
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -147,6 +160,6 @@ export default function Projects() {
           ))}
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }
