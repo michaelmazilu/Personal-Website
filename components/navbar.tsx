@@ -7,6 +7,13 @@ import ThemeToggle from "@/components/theme-toggle"
 import { cn } from "@/lib/utils"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Major_Mono_Display } from "next/font/google"
+
+const majorMono = Major_Mono_Display({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-major-mono",
+})
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -32,7 +39,7 @@ export default function Navbar() {
     <motion.header
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300",
-        scrolled ? "py-2 bg-[#212121]/90 backdrop-blur-sm" : "py-4 bg-transparent",
+        scrolled ? "py-2 bg-background/90 backdrop-blur-sm" : "py-4 bg-transparent",
       )}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -40,7 +47,7 @@ export default function Navbar() {
     >
       <div className="container flex items-center justify-end">
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className={`hidden md:flex items-center space-x-8 ${majorMono.className}`}>
           {navLinks.map((link) => (
             <Link key={link.name} href={link.href} className="text-sm font-medium hover:text-primary transition-colors">
               {link.name}
@@ -67,7 +74,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <motion.div
-          className="md:hidden bg-[#212121]/95 backdrop-blur-sm"
+          className={`md:hidden bg-background/95 backdrop-blur-sm ${majorMono.className}`}
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}

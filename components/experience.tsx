@@ -1,33 +1,28 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { CalendarIcon, MapPinIcon } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
 
 export default function Experience() {
   const experiences = [
     {
-      title: "AP Student",
-      organization: "High School Name",
-      location: "City, State",
-      period: "2022 - Present",
-      description:
-        "Taking advanced placement courses in Mathematics, Physics, and Computer Science. Maintaining a 4.0 GPA across all AP subjects.",
+      title: "Mechanical Engineering Intern",
+      company: "Waterloo Design Team",
+      period: "Jan 2025 - Present",
+      description: "As a mechanical engineering intern, I worked on designing humanoid robots (fingers), contributing to the development of mechanical systems that mimic human movement.",
+      tags: ["CAD", "Figma", "Design Systems"],
+      image: "/images/experience/waterloo-design.jpg",
+      slug: "waterloo-design"
     },
     {
-      title: "Science Club President",
-      organization: "High School Science Club",
-      location: "City, State",
-      period: "2023 - Present",
-      description:
-        "Leading weekly meetings, organizing science fairs, and coordinating with faculty advisors to create engaging STEM activities for club members.",
-    },
-    {
-      title: "Volunteer Tutor",
-      organization: "Community Learning Center",
-      location: "City, State",
-      period: "2022 - Present",
-      description:
-        "Providing free tutoring in mathematics and science to middle school students, helping them improve their academic performance and confidence.",
+      title: "Computer Repair Technician",
+      company: "Unlimitek",
+      period: "Jan 2024 - Present",
+      description: "Developing and maintaining web applications using modern technologies.",
+      tags: ["React", "TypeScript", "Node.js"],
+      image: "/images/experience/unlimitek.jpg",
+      slug: "unlimitek"
     },
   ]
 
@@ -47,7 +42,7 @@ export default function Experience() {
   }
 
   return (
-    <section id="experience" className="py-20 md:py-32 bg-[#1c1c1c]">
+    <section id="experience" className="py-20 md:py-32">
       <div className="container px-4">
         <div className="text-center mb-16">
           <motion.div
@@ -57,9 +52,6 @@ export default function Experience() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl font-light tracking-tight mb-4">Experience</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Academic achievements and extracurricular activities that have shaped my journey.
-            </p>
           </motion.div>
         </div>
 
@@ -70,23 +62,37 @@ export default function Experience() {
           viewport={{ once: true }}
           className="max-w-3xl mx-auto space-y-8"
         >
-          {experiences.map((experience, index) => (
-            <motion.div key={index} variants={item} className="relative pl-8 border-l-2 border-[#333333]">
-              <div className="absolute -left-[9px] top-1 h-4 w-4 rounded-full bg-primary" />
-              <div className="mb-1 flex items-center text-sm text-muted-foreground">
-                <CalendarIcon className="h-4 w-4 mr-2" />
-                <span>{experience.period}</span>
+          {experiences.map((exp, index) => (
+            <motion.div key={index} variants={item} className="flex gap-4 items-start border-b border-border pb-6">
+              <div className="flex-shrink-0 w-12 h-12 rounded bg-white flex items-center justify-center overflow-hidden border border-border">
+                <Image src={exp.image} alt={exp.company + ' logo'} width={48} height={48} className="object-contain" />
               </div>
-              <h3 className="text-xl font-medium">{experience.title}</h3>
-              <div className="mb-3 flex items-center text-sm">
-                <span className="font-medium">{experience.organization}</span>
-                <span className="mx-2">•</span>
-                <span className="flex items-center text-muted-foreground">
-                  <MapPinIcon className="h-3 w-3 mr-1" />
-                  {experience.location}
-                </span>
+              <div className="flex-1">
+                <div className="flex flex-col md:flex-row md:items-center md:gap-2">
+                  <Link 
+                    href={`/experience/${exp.slug}`}
+                    className="group"
+                  >
+                    <span className="font-semibold text-lg inline-block relative">
+                      {exp.title}
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-foreground transition-all duration-300 group-hover:w-full"></span>
+                    </span>
+                  </Link>
+                  <span className="text-muted-foreground md:ml-2">{exp.company}</span>
+                </div>
+                <div className="text-muted-foreground text-sm mt-1">{exp.period}</div>
+                <div className="mt-2">{exp.description}</div>
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {exp.tags.map((tag, tagIndex) => (
+                    <span
+                      key={tagIndex}
+                      className="text-xs px-3 py-1 rounded-full bg-secondary text-secondary-foreground"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <p className="text-muted-foreground">{experience.description}</p>
             </motion.div>
           ))}
         </motion.div>

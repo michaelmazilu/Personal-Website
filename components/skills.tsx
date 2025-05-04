@@ -7,11 +7,11 @@ export default function Skills() {
   const skills = [
     {
       icon: <Calculator className="h-8 w-8" />,
-      name: "Mathematics",
+      name: "placeholder",
       description: "Advanced calculus, statistics, and problem-solving",
     },
     {
-      icon: <Atom className="h-8 w-8" />,
+      icon: <Atom className="h-`8 w-8" />,
       name: "Physics",
       description: "Mechanics, thermodynamics, and electromagnetism",
     },
@@ -73,7 +73,7 @@ export default function Skills() {
   }
 
   return (
-    <section id="skills" className="py-20 md:py-32 bg-[#1c1c1c]">
+    <section id="skills" className="py-20 md:py-32">
       <div className="container px-4">
         <div className="text-center mb-16">
           <motion.div
@@ -100,7 +100,7 @@ export default function Skills() {
             <motion.div
               key={index}
               variants={item}
-              className="bg-card hover:bg-[#252525] transition-colors duration-300 rounded-2xl p-6 text-center"
+              className="bg-card hover:bg-accent transition-colors duration-300 rounded-2xl p-6 text-center"
             >
               <div className="text-primary mb-4 flex justify-center">{skill.icon}</div>
               <h3 className="font-medium mb-2">{skill.name}</h3>

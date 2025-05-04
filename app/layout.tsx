@@ -3,6 +3,8 @@ import "@/app/globals.css"
 import { Inter } from "next/font/google"
 import Navbar from "@/components/navbar"
 import { cn } from "@/lib/utils"
+import { ThemeProvider } from "next-themes"
+import Background from "@/components/background"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,10 +22,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning >
-      <body className={cn("min-h-screen bg-[#212121] text-foreground font-sans antialiased dark ", inter.variable)}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn("min-h-screen text-foreground font-sans antialiased", inter.variable)}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <Background />
           <Navbar />
           {children}
+        </ThemeProvider>
       </body>
     </html>
   )
