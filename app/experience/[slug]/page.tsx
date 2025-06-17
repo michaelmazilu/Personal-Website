@@ -5,31 +5,30 @@ import { ArrowLeft } from "lucide-react"
 
 // This would typically come from a database or CMS
 const experiences = {
-  "waterloo-design": {
-    title: "Mechanical Engineering Intern",
-    company: "Waterloo Design Team",
-    period: "Jan 2025 - Present",
-    description: "As a mechanical engineering intern, I worked on designing humanoid robots (fingers), contributing to the development of mechanical systems that mimic human movement.",
-    longDescription: `As a mechanical engineering intern at Waterloo Design Team, I focused on the development of humanoid robot fingers. My responsibilities included:
-
-• Designing and prototyping mechanical components using CAD software
-• Collaborating with cross-functional teams to integrate mechanical systems
-• Conducting testing and validation of robotic movements
-• Contributing to design documentation and technical specifications`,
-    tags: ["CAD", "Figma", "Design Systems"],
-    image: "/images/experience/waterloo-design.jpg",
+  "swarmzero-internship": {
+    title: "Software Engineering Intern",
+    company: "Swarmzero.ai",
+    period: "September 2024 - December 2024",
+    description: "As a Software Engineering Intern at Swarmzero.ai, I developed and optimized backend services for their AI platform.",
+    longDescription: `During my Software Engineering Internship at Swarmzero.ai, my responsibilities included:\n\n• Developing and optimizing backend services for the AI platform.\n• Implementing new features and improving existing functionalities.\n• Collaborating with the team to design and deploy scalable solutions.`,
+    tags: ["Python", "TensorFlow", "FastAPI"],
+    image: "/images/experience/swarmzero_logo.jpg",
+  },
+  "waterloo-reality-labs": {
+    title: "Software Developer",
+    company: "Waterloo Reality Labs",
+    period: "May 2024 - August 2024",
+    description: "Trained a PyTorch feedforward neural network, achieving 99.98% accuracy in classifying RGB colors as warm or cool, by generating synthetic data and using backpropagation. Implemented hand gesture controls for a Meta Quest VR app using the Meta SDK and XR Simulator.",
+    longDescription: `At Waterloo Reality Labs, I worked on advanced software development projects, including:\n\n• Training a PyTorch feedforward neural network for highly accurate RGB color classification, utilizing synthetic data generation and backpropagation techniques.\n• Implementing intricate hand gesture controls for a Meta Quest VR application, leveraging the Meta SDK and XR Simulator for realistic interactions.\n• Contributing to the development of innovative VR experiences and applications.`,
+    tags: ["Python", "PyTorch", "Meta Quest SDK", "C#", "Unity"],
+    image: "/images/experience/waterloo-reality-labs.jpg",
   },
   "unlimitek": {
     title: "Computer Repair Technician",
     company: "Unlimitek",
     period: "Jan 2024 - Present",
     description: "Developing and maintaining web applications using modern technologies.",
-    longDescription: `At Unlimitek, I work as a Computer Repair Technician where I:
-
-• Diagnose and repair hardware and software issues
-• Provide technical support to customers
-• Maintain inventory of parts and components
-• Document repair processes and solutions`,
+    longDescription: `At Unlimitek, I work as a Computer Repair Technician where I:\n\n• Diagnose and repair hardware and software issues\n• Provide technical support to customers\n• Maintain inventory of parts and components\n• Document repair processes and solutions.`,
     tags: ["React", "TypeScript", "Node.js"],
     image: "/images/experience/unlimitek.jpg",
   },
